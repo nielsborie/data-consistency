@@ -1,0 +1,8 @@
+[app]
+app_intro = """
+This app allows you to evaluate the difference between two dataset in just a few clicks.
+All you have to do is to upload :
+- a dataset BEFORE
+- a dataset AFTER
+- a referential as json dictionnary
+"""
