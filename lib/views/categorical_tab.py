@@ -1,7 +1,7 @@
 import streamlit as st
-from lib.annotation.annotation import annotation, annotated_text
 import pandas as pd
 import numpy as np
+from lib.annotation.annotation import annotation, annotated_text
 
 
 def null_percentage(serie: pd.Series):

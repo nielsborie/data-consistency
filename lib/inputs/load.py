@@ -1,9 +1,9 @@
+from pathlib import Path
 from typing import Any, Dict, Tuple
+
 import pandas as pd
-import requests
 import streamlit as st
 import toml
-from pathlib import Path
 from PIL import Image
 
 
