@@ -1,0 +1,32 @@
+{
+  "fields": {
+    "feature1": {
+      "type": "integer",
+      "description": "feature1 is an integer field"
+    },
+    "feature2": {
+      "type": "boolean",
+      "description": "feature2 is a boolean field"
+    },
+    "feature3": {
+      "type": "double",
+      "description": "feature3 is a double field"
+    },
+    "feature4": {
+      "type": "text",
+      "description": "feature4 is a text field"
+    },
+    "feature5": {
+      "type": "category",
+      "description": "feature5 is a category field"
+    },
+    "feature6": {
+      "type": "date",
+      "description": "feature6 is a date field"
+    },
+    "feature7": {
+      "type": "datetime",
+      "description": "feature7 is a datetime field"
+    }
+  }
+}
