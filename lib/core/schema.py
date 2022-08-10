@@ -56,7 +56,16 @@ class Mappings:
         return [field.name for field in self.fields]
 
     def get_categorical_fields(self) -> List[Field]:
-        return [f for f in self.fields if f.type == FieldType.CATEGORY]
+        return [f for f in self.fields if (f.type == FieldType.CATEGORY or f.type == FieldType.BOOLEAN)]
+
+    def get_numerical_fields(self) -> List[Field]:
+        return [f for f in self.fields if (f.type == FieldType.DOUBLE or f.type == FieldType.INTEGER)]
+
+    def get_datetime_fields(self) -> List[Field]:
+        return [f for f in self.fields if (f.type == FieldType.DATETIME or f.type == FieldType.DATE)]
+
+    def get_text_fields(self) -> List[Field]:
+        return [f for f in self.fields if f.type == FieldType.STRING]
 
     def ensure_mappings_are_valid(self):
         if not self.fields:
