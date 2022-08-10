@@ -1,7 +1,7 @@
 import streamlit as st
 
 from lib.views.categorical_tab import categorical_view
-from lib.inputs.load import load_image, input_file
+from lib.inputs.load import load_image, input_file, input_schema
 
 # Page config
 from lib.views.custom_tab import custom_view
@@ -23,16 +23,15 @@ with st.expander("What is this app?", expanded=False):
     st.write("")
 st.write("")
 
-col1, col2, col3 = st.sidebar.columns([1,1,1])
+col1, col2, col3 = st.sidebar.columns([1, 1, 1])
 
 col1.write("")
 col2.image(load_image("logo.png"), use_column_width=False)
 col3.write("")
 
-
 # Load data dictionary
 with st.sidebar.expander("Referential", expanded=True):
-    dict_ref = input_file(key="dictionary")
+    mapping_schema = input_schema(key="dictionary")
 
     # Load data 1
     with st.sidebar.expander("Dataset 1", expanded=True):
@@ -42,19 +41,18 @@ with st.sidebar.expander("Referential", expanded=True):
         with st.sidebar.expander("Dataset 2", expanded=True):
             df2 = input_file(key="df2")
 
-
 with st.expander("Analysis Tabs", expanded=True):
     option = st.selectbox("", ('Overview', 'Numerical', "Categorical", "Custom"), 0)
 
     if option is not None:
         if option == 'Overview':
-            overview(dict_ref, df1, df2)
+            overview(mapping_schema, df1, df2)
 
         if option == 'Numerical':
-            numerical_view(dict_ref, df1, df2)
+            numerical_view(mapping_schema, df1, df2)
 
         if option == 'Categorical':
-            categorical_view(dict_ref, df1, df2)
+            categorical_view(mapping_schema, df1, df2)
 
         if option == 'Custom':
-            custom_view(dict_ref, df1, df2)
+            custom_view(mapping_schema, df1, df2)

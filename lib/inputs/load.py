@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import Any, Dict, Tuple
 
@@ -5,6 +6,8 @@ import pandas as pd
 import streamlit as st
 import toml
 from PIL import Image
+
+from lib.core.schema import Mappings
 
 
 def get_project_root() -> str:
@@ -122,6 +125,31 @@ def input_file(key: str) -> pd.DataFrame:
         st.stop()
     return df
 
+@st.cache(suppress_st_warning=True, ttl=300)
+def input_schema(key: str) -> Mappings:
+    """Lets the user upload its mapping schema.
+
+    Parameters
+    ----------
+    key
+        Internal argument to differentiate the use of this function several time
+    Returns
+    -------
+    Mappings
+        Selected schema loaded into a dict.
+    """
+    file = st.file_uploader(
+        "Upload the mapping schema file",
+        type="json",
+        key=key,
+        help="""Describe your input data""")
+    mappings_schema = None
+    if file is not None:
+        raw_schema = json.load(file)
+        mappings_schema = Mappings(raw_schema)
+    else:
+        st.stop()
+    return mappings_schema
 
 @st.cache(allow_output_mutation=True)
 def get_static_store() -> Dict:
