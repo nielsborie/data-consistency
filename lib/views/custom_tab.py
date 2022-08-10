@@ -3,8 +3,8 @@ import streamlit as st
 
 from lib.annotation.annotation import annotated_text, annotation
 from lib.views.categorical_tab import count_modalities, jaccard_dissimilarity
+from lib.views.datetime_tab import display_datetime_consistency
 from lib.views.numerical_tab import null_percentage, get_min, get_max, display_divergence
-import plotly.figure_factory as ff
 
 
 def display_numerical_consistency(feature1, feature2, a, b):
@@ -46,19 +46,6 @@ def display_categorical_consistency(feature1, feature2, a, b):
     )
     st.markdown("""---""")
 
-def plot_gantt(a: pd.DataFrame, b: pd.DataFrame):
-    gantt_list = []
-    periods = []
-    for i, dd in enumerate([a, b]):
-        start_date = min(pd.to_datetime(dd)).to_pydatetime().strftime('%Y-%m-%d')
-        end_date = max(pd.to_datetime(dd)).to_pydatetime().strftime('%Y-%m-%d')
-        periods.append((start_date, end_date))
-
-        gantt_list.append(dict(Task=i, Start=start_date, Finish=end_date, Resource="df"+str(i)))
-
-    fig = ff.create_gantt(gantt_list, index_col='Resource', show_colorbar=True,
-                          group_tasks=True)
-    return fig, periods
 
 def custom_view(dict_ref, df1, df2):
     st.markdown("""---""")
@@ -99,19 +86,7 @@ def custom_view(dict_ref, df1, df2):
                         try:
                             a = pd.to_datetime(df1[fe_df1])
                             b = pd.to_datetime(df2[fe_df2])
-                            fig, periods = plot_gantt(a, b)
-                            col1_period, col2_period, col3_period = st.columns([1, 1, 1])
-                            col1_period.caption("")
-                            col2_period.caption("min")
-                            col3_period.caption("max")
-                            col1_period.caption("df1")
-                            col2_period.write(periods[0][0])
-                            col3_period.write(periods[0][1])
-                            col1_period.caption("df2")
-                            col2_period.write(periods[1][0])
-                            col3_period.write(periods[1][1])
-                            st.plotly_chart(fig, use_container_width=True)
                         except:
                             st.error("Cannot cast to datetime format, choose an other type")
                             st.stop()
-
+                        display_datetime_consistency(f"{fe_df1}_{fe_df2}", a, b)

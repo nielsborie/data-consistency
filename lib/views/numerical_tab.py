@@ -1,8 +1,11 @@
+from typing import Dict, List
+
 import pandas as pd
 import streamlit as st
 
 from lib.consistency.consistency import compute_jensen_shannon_divergence
 from lib.annotation.annotation import annotation, annotated_text
+from lib.core.schema import Mappings, Field
 
 
 def display_divergence(serie1, serie2):
@@ -43,16 +46,17 @@ def display_numerical_consistency(feature, a, b):
     st.markdown("""---""")
 
 
-def numerical_view(dict_ref, df1, df2):
+def numerical_view(mapping_schema: Mappings, df1: pd.DataFrame, df2: pd.DataFrame):
     st.markdown("""---""")
-    if dict_ref is not None:
-        if df1 is not None:
-            if df2 is not None:
-                numerical_dict = dict_ref[(dict_ref["type"] == "float") | (dict_ref["type"] == "integer")]
-                num_1 = [col for col in df1.columns if col in numerical_dict["name"]]
-                num_2 = [col for col in df2.columns if col in numerical_dict["name"]]
-                num_cols = list(set(num_1).intersection(set(num_2)))
-                for num_col in num_cols:
-                    a = df1[num_col].astype(float)
-                    b = df2[num_col].astype(float)
-                    display_numerical_consistency(num_col, a, b)
+    if mapping_schema is None:
+        mapping_schema = Mappings({})
+    if df1 is not None:
+        if df2 is not None:
+            numerical_fields: List[str] = [field.name for field in mapping_schema.get_numerical_fields()]
+            num_1 = [col for col in df1.columns if col in numerical_fields]
+            num_2 = [col for col in df2.columns if col in numerical_fields]
+            num_cols = list(set(num_1).intersection(set(num_2)))
+            for num_col in num_cols:
+                a = df1[num_col].astype(float)
+                b = df2[num_col].astype(float)
+                display_numerical_consistency(num_col, a, b)
