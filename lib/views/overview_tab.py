@@ -3,9 +3,6 @@ import streamlit as st
 
 from lib.core.schema import DataSchema
 
-REFERENCE_COLUMN = "ID"
-DATETIME_COLUMN = "datetimeColumn"
-
 
 def overview(data_schema: DataSchema, df1: pd.DataFrame, df2: pd.DataFrame):
     if data_schema is None:
@@ -27,19 +24,19 @@ def overview(data_schema: DataSchema, df1: pd.DataFrame, df2: pd.DataFrame):
 
             st.subheader("Header consistency")
             not_same_col = [(col1, col2) for col1, col2 in zip(df1.columns, df2.columns) if col1 != col2]
-            display_list_consistency("Diff in positional headers", not_same_col)
+            display_header_consistency("Diff in positional headers", not_same_col)
 
             st.markdown("""---""")
             common_cols = list(set(df1.columns).intersection(set(df2.columns)))
-            display_list_consistency("Common columns", common_cols)
+            display_header_consistency("Common columns", common_cols)
 
             st.markdown("""---""")
             diff_cols_left = list(set(df1.columns) - (set(df2.columns)))
-            display_list_consistency("Columns in df1 not in df2", diff_cols_left)
+            display_header_consistency("Columns in df1 not in df2", diff_cols_left)
 
             st.markdown("""---""")
             diff_cols_right = list(set(df2.columns) - (set(df1.columns)))
-            display_list_consistency("Columns in df2 not in df1", diff_cols_right)
+            display_header_consistency("Columns in df2 not in df1", diff_cols_right)
 
             st.subheader("Header")
             st.caption("Dictionary")
@@ -55,7 +52,7 @@ def overview(data_schema: DataSchema, df1: pd.DataFrame, df2: pd.DataFrame):
         st.stop()
 
 
-def display_list_consistency(info: str, input_list):
+def display_header_consistency(info: str, input_list):
     col1, col2, col3 = st.columns([1, 1, 1])
     col1.caption(info)
     col2.caption("Size")

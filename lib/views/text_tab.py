@@ -7,9 +7,9 @@ from lib.consistency.consistency import reference_consistency
 from lib.core.schema import DataSchema
 
 
-def display_text_consistency(text_col: str, df1: pd.DataFrame, df2: pd.DataFrame):
+def display_text_consistency(feature: str, df1: pd.DataFrame, df2: pd.DataFrame):
     st.subheader("Text consistency")
-    same_id, intersection = reference_consistency(df1, df2, text_col)
+    same_id, intersection = reference_consistency(df1, df2, feature)
     st.caption("Same text")
     st.write(same_id)
     st.caption("text intersection %")

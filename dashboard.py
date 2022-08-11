@@ -55,4 +55,4 @@ with st.expander("Analysis Tabs", expanded=True):
             categorical_view(data_schema, df1, df2)
 
         if option == 'Custom':
-            custom_view(data_schema, df1, df2)
+            custom_view(df1, df2)
