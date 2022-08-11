@@ -1,24 +1,25 @@
-from typing import List, Dict
+from typing import List
 
-import streamlit as st
-import pandas as pd
 import numpy as np
+import pandas as pd
+import streamlit as st
+
 from lib.annotation.annotation import annotation, annotated_text
 from lib.core.schema import DataSchema
 
 
-def null_percentage(serie: pd.Series):
-    return "{:.1%}".format(serie.isnull().sum() / len(serie))
+def null_percentage(categories: pd.Series):
+    return "{:.1%}".format(categories.isnull().sum() / len(categories))
 
 
-def jaccard_dissimilarity(serie1, serie2):
-    intersection = len(np.intersect1d(serie1, serie2))
-    union = (len(set(serie1)) + len(set(serie2))) - intersection
+def jaccard_dissimilarity(categories1, categories2):
+    intersection = len(np.intersect1d(categories1, categories2))
+    union = (len(set(categories1)) + len(set(categories2))) - intersection
     return "{:.1f}".format(100 * (1 - (float(intersection) / union)))
 
 
-def count_modalities(serie: pd.Series):
-    return serie.nunique()
+def count_modalities(categories: pd.Series):
+    return categories.nunique()
 
 
 def display_categorical_consistency(feature, a, b):

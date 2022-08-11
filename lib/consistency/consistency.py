@@ -29,10 +29,10 @@ def compute_jensen_shannon_divergence(a: pd.Series, b: pd.Series):
     return jensenshannon(distribution_a, distribution_b, base=2)
 
 
-def plot_gantt(a: pd.Series, b: pd.Series, date_col: str):
+def plot_gantt(time_series1: pd.Series, time_series2: pd.Series, date_col: str):
     gantt_list = []
     periods = []
-    for i, dd in enumerate([a, b]):
+    for i, dd in enumerate([time_series1, time_series2]):
         start_date = min(dd).to_pydatetime().strftime('%Y-%m-%d')
         end_date = max(dd).to_pydatetime().strftime('%Y-%m-%d')
         periods.append((start_date, end_date))

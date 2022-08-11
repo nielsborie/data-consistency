@@ -1,6 +1,7 @@
-from typing import Dict, List
-import streamlit as st
+from typing import List
+
 import pandas as pd
+import streamlit as st
 
 from lib.annotation.annotation import annotated_text, annotation
 from lib.consistency.consistency import plot_gantt

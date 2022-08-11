@@ -1,11 +1,11 @@
-from typing import Dict, List
+from typing import List
 
 import pandas as pd
 import streamlit as st
 
-from lib.consistency.consistency import compute_jensen_shannon_divergence
 from lib.annotation.annotation import annotation, annotated_text
-from lib.core.schema import DataSchema, Field
+from lib.consistency.consistency import compute_jensen_shannon_divergence
+from lib.core.schema import DataSchema
 
 
 def display_divergence(serie1, serie2):
