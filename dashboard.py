@@ -5,8 +5,10 @@ from lib.inputs.load import load_image, input_file, input_data_schema
 
 # Page config
 from lib.views.custom_tab import custom_view
+from lib.views.datetime_tab import datetime_consistency_view
 from lib.views.numerical_tab import numerical_view
 from lib.views.overview_tab import overview
+from lib.views.text_tab import text_consistency_view
 
 st.set_page_config(page_title="Data consistency", layout="wide")
 
@@ -42,7 +44,7 @@ with st.sidebar.expander("Referential", expanded=True):
             df2 = input_file(key="df2")
 
 with st.expander("Analysis Tabs", expanded=True):
-    option = st.selectbox("", ('Overview', 'Numerical', "Categorical", "Custom"), 0)
+    option = st.selectbox("", ('Overview', 'Numerical', "Categorical", "Temporal", "Textual", "Custom"), 0)
 
     if option is not None:
         if option == 'Overview':
@@ -53,6 +55,12 @@ with st.expander("Analysis Tabs", expanded=True):
 
         if option == 'Categorical':
             categorical_view(data_schema, df1, df2)
+
+        if option == 'Temporal':
+            datetime_consistency_view(mapping_schema, df1, df2)
+
+        if option == 'Textual':
+            text_consistency_view(mapping_schema, df1, df2)
 
         if option == 'Custom':
             custom_view(df1, df2)
