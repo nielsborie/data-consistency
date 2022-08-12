@@ -38,18 +38,18 @@ class Field:
         self.description: Optional[str] = properties.get("description")
 
 
-class Mappings:
-    def __init__(self, raw_mapping: Dict):
-        self.raw_mapping = raw_mapping
-        fields_dict: Dict = self.raw_mapping.get("fields", {})
+class DataSchema:
+    def __init__(self, raw_schema: Dict):
+        self.raw_schema = raw_schema
+        fields_dict: Dict = self.raw_schema.get("fields", {})
         self.fields: List[Field] = [Field(key, fields_dict[key]) for key in fields_dict.keys()]
-        self.ensure_mappings_are_valid()
+        self.ensure_data_schema_is_valid()
 
     def get_field_by_name(self, field_name: str) -> Field:
         for field in self.fields:
             if field.name == field_name:
                 return field
-        error_message = f"Mapping does not contain field {field_name} in 'fields' key"
+        error_message = f"Data schema does not contain field {field_name} in 'fields' key"
         raise ValueError(error_message)
 
     def get_fields_names(self) -> List[str]:
@@ -67,6 +67,6 @@ class Mappings:
     def get_text_fields(self) -> List[Field]:
         return [f for f in self.fields if f.type == FieldType.STRING]
 
-    def ensure_mappings_are_valid(self):
+    def ensure_data_schema_is_valid(self):
         if not self.fields:
-            raise ValueError(f"Mapping does not contain any field in 'fields' key")
+            raise ValueError(f"Data schema does not contain any field in 'fields' key")

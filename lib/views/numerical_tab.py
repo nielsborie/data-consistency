@@ -5,7 +5,7 @@ import streamlit as st
 
 from lib.consistency.consistency import compute_jensen_shannon_divergence
 from lib.annotation.annotation import annotation, annotated_text
-from lib.core.schema import Mappings, Field
+from lib.core.schema import DataSchema, Field
 
 
 def display_divergence(serie1, serie2):
@@ -46,13 +46,13 @@ def display_numerical_consistency(feature, a, b):
     st.markdown("""---""")
 
 
-def numerical_view(mapping_schema: Mappings, df1: pd.DataFrame, df2: pd.DataFrame):
+def numerical_view(data_schema: DataSchema, df1: pd.DataFrame, df2: pd.DataFrame):
     st.markdown("""---""")
-    if mapping_schema is None:
-        mapping_schema = Mappings({})
+    if data_schema is None:
+        data_schema = DataSchema({})
     if df1 is not None:
         if df2 is not None:
-            numerical_fields: List[str] = [field.name for field in mapping_schema.get_numerical_fields()]
+            numerical_fields: List[str] = [field.name for field in data_schema.get_numerical_fields()]
             num_1 = [col for col in df1.columns if col in numerical_fields]
             num_2 = [col for col in df2.columns if col in numerical_fields]
             num_cols = list(set(num_1).intersection(set(num_2)))

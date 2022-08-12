@@ -1,7 +1,7 @@
 import streamlit as st
 
 from lib.views.categorical_tab import categorical_view
-from lib.inputs.load import load_image, input_file, input_schema
+from lib.inputs.load import load_image, input_file, input_data_schema
 
 # Page config
 from lib.views.custom_tab import custom_view
@@ -31,7 +31,7 @@ col3.write("")
 
 # Load data dictionary
 with st.sidebar.expander("Referential", expanded=True):
-    mapping_schema = input_schema(key="dictionary")
+    data_schema = input_data_schema(key="dictionary")
 
     # Load data 1
     with st.sidebar.expander("Dataset 1", expanded=True):
@@ -46,13 +46,13 @@ with st.expander("Analysis Tabs", expanded=True):
 
     if option is not None:
         if option == 'Overview':
-            overview(mapping_schema, df1, df2)
+            overview(data_schema, df1, df2)
 
         if option == 'Numerical':
-            numerical_view(mapping_schema, df1, df2)
+            numerical_view(data_schema, df1, df2)
 
         if option == 'Categorical':
-            categorical_view(mapping_schema, df1, df2)
+            categorical_view(data_schema, df1, df2)
 
         if option == 'Custom':
-            custom_view(mapping_schema, df1, df2)
+            custom_view(data_schema, df1, df2)

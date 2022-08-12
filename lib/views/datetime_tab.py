@@ -4,7 +4,7 @@ import pandas as pd
 
 from lib.annotation.annotation import annotated_text, annotation
 from lib.consistency.consistency import plot_gantt
-from lib.core.schema import Mappings
+from lib.core.schema import DataSchema
 
 
 def display_datetime_consistency(datetime_col: str, a: pd.Series, b: pd.Series):
@@ -27,13 +27,13 @@ def display_datetime_consistency(datetime_col: str, a: pd.Series, b: pd.Series):
     st.markdown("""---""")
 
 
-def datetime_consistency_view(mapping_schema: Mappings, df1: pd.DataFrame, df2: pd.DataFrame):
+def datetime_consistency_view(data_schema: DataSchema, df1: pd.DataFrame, df2: pd.DataFrame):
     st.markdown("""---""")
-    if mapping_schema is None:
-        mapping_schema = Mappings({})
+    if data_schema is None:
+        data_schema = DataSchema({})
     if df1 is not None:
         if df2 is not None:
-            datetime_fields: List[str] = [field.name for field in mapping_schema.get_datetime_fields()]
+            datetime_fields: List[str] = [field.name for field in data_schema.get_datetime_fields()]
             datetime_1 = [col for col in df1.columns if col in datetime_fields]
             datetime_2 = [col for col in df2.columns if col in datetime_fields]
             datetime_cols = list(set(datetime_1).intersection(set(datetime_2)))
