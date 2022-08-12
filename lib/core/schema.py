@@ -6,10 +6,15 @@ class FieldType(Enum):
     BOOLEAN = "boolean"
     INTEGER = "integer"
     DOUBLE = "double"
-    STRING = "text"
+    STRING = "string"
+    OBJECT = "object"
     CATEGORY = "category"
     DATE = "date"
     DATETIME = "datetime"
+
+    @classmethod
+    def list(cls):
+        return list(map(lambda c: c.value, cls))
 
     @staticmethod
     def get_inner_type(field_type: str) -> str:
@@ -21,6 +26,8 @@ class FieldType(Enum):
             case FieldType.DOUBLE.value:
                 target_type = "float"
             case FieldType.STRING.value:
+                target_type = "str"
+            case FieldType.OBJECT.value:
                 target_type = "object"
             case FieldType.CATEGORY.value:
                 target_type = "category"
