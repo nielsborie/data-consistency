@@ -1,15 +1,15 @@
 import pandas as pd
 import streamlit as st
 
-from lib.core.schema import Mappings
+from lib.core.schema import DataSchema
 
 REFERENCE_COLUMN = "ID"
 DATETIME_COLUMN = "datetimeColumn"
 
 
-def overview(mapping_schema: Mappings, df1: pd.DataFrame, df2: pd.DataFrame):
-    if mapping_schema is None:
-        mapping_schema = Mappings({})
+def overview(data_schema: DataSchema, df1: pd.DataFrame, df2: pd.DataFrame):
+    if data_schema is None:
+        data_schema = DataSchema({})
     if df1 is not None:
         if df2 is not None:
             st.subheader("Shape consistency")
@@ -43,7 +43,7 @@ def overview(mapping_schema: Mappings, df1: pd.DataFrame, df2: pd.DataFrame):
 
             st.subheader("Header")
             st.caption("Dictionary")
-            st.dataframe(mapping_schema.raw_mapping)
+            st.dataframe(data_schema.raw_schema)
 
             st.caption("df1")
             st.dataframe(df1.head())

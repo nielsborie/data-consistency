@@ -7,7 +7,7 @@ import streamlit as st
 import toml
 from PIL import Image
 
-from lib.core.schema import Mappings
+from lib.core.schema import DataSchema
 
 
 def get_project_root() -> str:
@@ -126,8 +126,8 @@ def input_file(key: str) -> pd.DataFrame:
     return df
 
 @st.cache(suppress_st_warning=True, ttl=300)
-def input_schema(key: str) -> Mappings:
-    """Lets the user upload its mapping schema.
+def input_data_schema(key: str) -> DataSchema:
+    """Lets the user upload its data schema.
 
     Parameters
     ----------
@@ -135,21 +135,21 @@ def input_schema(key: str) -> Mappings:
         Internal argument to differentiate the use of this function several time
     Returns
     -------
-    Mappings
+    DataSchema
         Selected schema loaded into a dict.
     """
     file = st.file_uploader(
-        "Upload the mapping schema file",
+        "Upload the data schema file",
         type="json",
         key=key,
         help="""Describe your input data""")
-    mappings_schema = None
+    data_schema = None
     if file is not None:
         raw_schema = json.load(file)
-        mappings_schema = Mappings(raw_schema)
+        data_schema = DataSchema(raw_schema)
     else:
         st.stop()
-    return mappings_schema
+    return data_schema
 
 @st.cache(allow_output_mutation=True)
 def get_static_store() -> Dict:
