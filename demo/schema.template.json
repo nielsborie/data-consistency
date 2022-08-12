@@ -13,8 +13,8 @@
       "description": "feature3 is a double field"
     },
     "feature4": {
-      "type": "text",
-      "description": "feature4 is a text field"
+      "type": "string",
+      "description": "feature4 is a string field"
     },
     "feature5": {
       "type": "category",

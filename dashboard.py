@@ -57,10 +57,10 @@ with st.expander("Analysis Tabs", expanded=True):
             categorical_view(data_schema, df1, df2)
 
         if option == 'Temporal':
-            datetime_consistency_view(mapping_schema, df1, df2)
+            datetime_consistency_view(data_schema, df1, df2)
 
         if option == 'Textual':
-            text_consistency_view(mapping_schema, df1, df2)
+            text_consistency_view(data_schema, df1, df2)
 
         if option == 'Custom':
             custom_view(df1, df2)
