@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "PassengerId": {
+      "type": "string",
+      "description": "feature1 is an integer field"
+    },
+    "Survived": {
+      "type": "boolean",
+      "description": "Survived (0 = No; 1 = Yes)"
+    },
+    "Pclass": {
+      "type": "string",
+      "description": "Passenger Class (1 = 1st; 2 = 2nd; 3 = 3rd)"
+    },
+    "Sex": {
+      "type": "string",
+      "description": "Sex"
+    },
+    "Age": {
+      "type": "integer",
+      "description": "Age"
+    },
+    "SibSp": {
+      "type": "integer",
+      "description": "Number of Siblings/Spouses Aboard"
+    },
+    "Parch": {
+      "type": "integer",
+      "description": "Number of Parents/Children Aboard"
+    },
+    "Ticket": {
+      "type": "string",
+      "description": "Ticket Number"
+    },
+    "Fare": {
+      "type": "double",
+      "description": "Passenger Fare (British pound)"
+    },
+    "Cabin": {
+      "type": "string",
+      "description": "Cabin"
+    },
+    "Embarked": {
+      "type": "string",
+      "description": "Port of Embarkation (C = Cherbourg; Q = Queenstown; S = Southampton)"
+    }
+  }
+}
