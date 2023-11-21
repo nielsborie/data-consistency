@@ -16,7 +16,7 @@ st.set_page_config(page_title="Data consistency", layout="wide")
 app_intro = """
 This app allows you to evaluate the difference between two dataset in just a few clicks.
 All you have to do is to upload :
-- a referential data dictionary that represent the format pivot which describe the structure of your data
+- a referential data schema that represent the pivot format (ie describe the structure of your data)
 - a dataset df1 (also called "Left")
 - a dataset df2 (also called "Right")
 """
