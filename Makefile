@@ -31,4 +31,4 @@ stop: ## Stop the streamlit-data-consistency container
 	docker stop streamlit-data-consistency
 
 run-locally: ## Run the streamlit app locally
-	source activate ${PROJECT_NAME} && streamlit run dashboard.py --server.maxUploadSize=1028
+	streamlit run dashboard.py --server.maxUploadSize=1028
