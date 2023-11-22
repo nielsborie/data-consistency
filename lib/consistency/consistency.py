@@ -33,8 +33,8 @@ def plot_gantt(time_series1: pd.Series, time_series2: pd.Series, date_col: str):
     gantt_list = []
     periods = []
     for i, dd in enumerate([time_series1, time_series2]):
-        start_date = min(dd).to_pydatetime().strftime('%Y-%m-%d')
-        end_date = max(dd).to_pydatetime().strftime('%Y-%m-%d')
+        start_date = min(pd.to_datetime(dd, utc=True)).to_pydatetime().strftime('%Y-%m-%d')
+        end_date = max(pd.to_datetime(dd, utc=True)).to_pydatetime().strftime('%Y-%m-%d')
         periods.append((start_date, end_date))
 
         gantt_list.append(dict(Task=i, Start=start_date, Finish=end_date, Resource="df" + str(i)))
